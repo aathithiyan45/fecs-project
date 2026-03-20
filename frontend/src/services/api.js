@@ -1,0 +1,75 @@
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+
+export const login = async (username, password) => {
+  const formData = new URLSearchParams();
+  formData.append('username', username);
+  formData.append('password', password);
+  
+  const response = await axios.post(`${API_URL}/token`, formData, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  });
+  return response.data;
+};
+
+export const getAlerts = async (token) => {
+  const response = await axios.get(`${API_URL}/alerts`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const updateAlertStatus = async (alertId, status, notes, token) => {
+  const response = await axios.patch(
+    `${API_URL}/alerts/${alertId}/status`,
+    { status, notes },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response.data;
+};
+
+export const getCurrentUser = async (token) => {
+  const response = await axios.get(`${API_URL}/users/me`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+// Device Registration APIs
+export const getUnmappedDevices = async (token) => {
+  const response = await axios.get(`${API_URL}/device-registrations/unmapped`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const registerDevice = async (deviceData, token) => {
+  const response = await axios.post(`${API_URL}/device-registrations`, deviceData, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const getRegisteredDevices = async (token) => {
+  const response = await axios.get(`${API_URL}/device-registrations`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const updateDeviceRegistration = async (deviceId, deviceData, token) => {
+  const response = await axios.put(`${API_URL}/device-registrations/${deviceId}`, deviceData, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const deactivateDeviceRegistration = async (deviceId, token) => {
+  const response = await axios.patch(`${API_URL}/device-registrations/${deviceId}/deactivate`, {}, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};

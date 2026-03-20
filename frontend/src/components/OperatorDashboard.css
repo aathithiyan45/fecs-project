@@ -1,0 +1,357 @@
+.operator-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #e3f2fd, #bbdefb, #90caf9, #64b5f6);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  color: #333;
+  overflow-x: hidden;
+  position: relative;
+  cursor: default;
+  user-select: none;
+}
+
+.operator-dashboard input,
+.operator-dashboard textarea,
+.operator-dashboard select {
+  user-select: text;
+  cursor: text;
+}
+
+.operator-dashboard button {
+  cursor: pointer;
+}
+
+.operator-dashboard * {
+  outline: none;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.operator-dashboard::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 25%);
+  animation: floatBubbles 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatBubbles {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.2);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9);
+  }
+}
+
+.operator-header,
+.operator-content,
+.dashboard-split {
+  position: relative;
+  z-index: 1;
+}
+
+.operator-header {
+  background: #1565c0;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.operator-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.operator-title .header-icon {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.operator-title h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.operator-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.station-badge {
+  background: #0d47a1;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.operator-badge {
+  background: #2e7d32;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logout-btn, .back-btn {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover, .back-btn:hover {
+  background: #f5f5f5;
+  border-color: #c62828;
+  color: #c62828;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.operator-content {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px);
+  border-color: #1976d2;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.map-icon {
+  color: #1976d2;
+}
+
+.alert-icon {
+  color: #f57c00;
+}
+
+.device-icon {
+  color: #388e3c;
+}
+
+.dashboard-card h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.3rem;
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.dashboard-card p {
+  color: #666;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.card-stat {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 1rem;
+}
+
+.card-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.card-btn:hover {
+  background: #1565c0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.recent-alerts {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.recent-alerts h3 {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.no-alerts {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-size: 1rem;
+}
+
+.alert-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.alert-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.alert-preview-item:hover {
+  border-color: #1976d2;
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-type-badge {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.alert-preview-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.alert-preview-info strong {
+  color: #1565c0;
+  font-size: 0.95rem;
+}
+
+.alert-preview-info span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.alert-preview-time {
+  color: #999;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Split View for Map & Alerts */
+.dashboard-split {
+  display: flex;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+.map-container {
+  flex: 2;
+  position: relative;
+  border-right: 3px solid #e3f2fd;
+}
+
+.alert-list-container {
+  flex: 1;
+  background-color: #fff;
+  overflow-y: auto;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .operator-content {
+    padding: 1rem;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-split {
+    flex-direction: column;
+  }
+
+  .map-container {
+    flex: 1;
+    border-right: none;
+    border-bottom: 3px solid #e3f2fd;
+  }
+
+  .alert-list-container {
+    flex: 1;
+  }
+}

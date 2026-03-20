@@ -1,0 +1,63 @@
+from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
+from sqlalchemy.sql import func
+from app.database import Base
+import enum
+
+class MessageType(str, enum.Enum):
+    NORMAL = "normal"
+    HIGH = "high"
+    EMERGENCY = "emergency"
+    CANCEL = "cancel"
+
+class SignalType(str, enum.Enum):
+    MANUAL = "manual"
+    AUTO = "auto"
+
+class AlertStatus(str, enum.Enum):
+    PENDING = "pending"
+    ACKNOWLEDGED = "acknowledged"
+    RESOLVED = "resolved"
+
+class UserRole(str, enum.Enum):
+    ADMIN = "admin"
+    OPERATOR = "operator"
+
+class Alert(Base):
+    __tablename__ = "alerts"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    packet_id = Column(String, unique=True, index=True, nullable=False)
+    device_id = Column(String, index=True, nullable=False)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
+    message_type = Column(Enum(MessageType), nullable=False)
+    signal_type = Column(Enum(SignalType), nullable=False)
+    event_time = Column(DateTime, nullable=False)
+    received_at = Column(DateTime, server_default=func.now(), nullable=False)
+    status = Column(Enum(AlertStatus), default=AlertStatus.PENDING, nullable=False)
+    source = Column(String, nullable=False)
+    notes = Column(String, nullable=True)
+
+class User(Base):
+    __tablename__ = "users"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    password_hash = Column(String, nullable=False)
+    role = Column(Enum(UserRole), nullable=False)
+    email = Column(String, nullable=True)
+    employee_id = Column(String, unique=True, nullable=True)
+    assigned_station = Column(String, nullable=True)
+    created_at = Column(DateTime, server_default=func.now(), nullable=False)
+    is_active = Column(Integer, default=1, nullable=False)
+
+class DeviceRegistration(Base):
+    __tablename__ = "device_registrations"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    device_id = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    phone_number = Column(String, nullable=False)
+    registered_by_emp_id = Column(String, nullable=False)
+    registered_at = Column(DateTime, server_default=func.now(), nullable=False)
+    is_active = Column(Integer, default=1, nullable=False)
