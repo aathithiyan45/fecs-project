@@ -18,7 +18,6 @@ function Login({ onLogin }) {
         setError('');
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
@@ -26,10 +25,8 @@ function Login({ onLogin }) {
   useEffect(() => {
     const container = document.querySelector('.login-container');
     if (!container) return;
-
     const fireflyCount = 20;
     const fireflies = [];
-
     for (let i = 0; i < fireflyCount; i++) {
       const firefly = document.createElement('div');
       firefly.className = 'firefly';
@@ -40,23 +37,17 @@ function Login({ onLogin }) {
       container.appendChild(firefly);
       fireflies.push(firefly);
     }
-
-    return () => {
-      fireflies.forEach(f => f.remove());
-    };
+    return () => { fireflies.forEach(f => f.remove()); };
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       const data = await login(employeeId, password);
       const token = data.access_token;
-      
       const user = await getCurrentUser(token);
-      
       if (isAdminMode && user.role !== 'admin') {
         setError('Access denied: Admin credentials required for Admin Portal');
         return;
@@ -65,7 +56,6 @@ function Login({ onLogin }) {
         setError('Access denied: Operator credentials required for Operator Dashboard');
         return;
       }
-
       onLogin(token, { username: user.username });
     } catch (err) {
       console.error('Login error:', err);
@@ -79,19 +69,13 @@ function Login({ onLogin }) {
     <div className={`login-container ${isAdminMode ? 'admin' : 'operator'}`}>
       <div className="stars"></div>
       <div className="login-box">
-        <div className="login-logo">
-          {/* <FaTree /> */}
-        </div>
+        <div className="login-logo"></div>
         <h1>Forest Emergency System</h1>
         <div className={`login-mode-header ${isAdminMode ? 'admin' : 'operator'}`}>
           {isAdminMode ? (
-            <>
-              <FaLock className="mode-icon" /> ADMIN LOGIN
-            </>
+            <><FaLock className="mode-icon" /> ADMIN LOGIN</>
           ) : (
-            <>
-              <FaTree className="mode-icon" /> OPERATOR LOGIN
-            </>
+            <><FaTree className="mode-icon" /> OPERATOR LOGIN</>
           )}
         </div>
         <form onSubmit={handleSubmit}>
@@ -116,28 +100,20 @@ function Login({ onLogin }) {
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
             className={isAdminMode ? 'admin-btn' : 'operator-btn'}
           >
             {loading ? 'Logging in...' : (
               isAdminMode ? (
-                <>
-                  <FaLock className="btn-icon" /> Login as Admin
-                </>
+                <><FaLock className="btn-icon" /> Login as Admin</>
               ) : (
-                <>
-                  <FaTree className="btn-icon" /> Login as Operator
-                </>
+                <><FaTree className="btn-icon" /> Login as Operator</>
               )
             )}
           </button>
         </form>
-        {/* <div className="login-hint">
-          {isAdminMode ? 'Press Ctrl+1 to switch to Operator mode' : 'Press Ctrl+1 for Admin access'}
-        </div> */}
-        {/* <div className="login-footer">Forest Department - 2024</div> */}
       </div>
     </div>
   );

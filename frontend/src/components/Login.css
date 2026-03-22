@@ -8,7 +8,6 @@
   overflow: hidden;
 }
 
-/* Forest Layers - Parallax Effect */
 .login-container::before {
   content: '';
   position: absolute;
@@ -17,16 +16,13 @@
   right: 0;
   height: 40%;
   background: 
-    /* Front trees */
     linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 100%),
-    /* Tree silhouettes */
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0,300 L0,200 L50,150 L100,200 L150,120 L200,200 L250,100 L300,200 L350,140 L400,200 L450,160 L500,200 L550,130 L600,200 L650,110 L700,200 L750,150 L800,200 L850,120 L900,200 L950,140 L1000,200 L1050,160 L1100,200 L1150,180 L1200,200 L1200,300 Z" fill="rgba(0,0,0,0.3)"/></svg>');
   background-size: 100% 100%;
   background-position: bottom center;
   background-repeat: no-repeat;
   z-index: 3;
   animation: sway1 12s ease-in-out infinite;
-  will-change: transform;
 }
 
 .login-container::after {
@@ -43,25 +39,16 @@
   background-repeat: no-repeat;
   z-index: 4;
   animation: sway2 15s ease-in-out infinite;
-  will-change: transform;
 }
 
 @keyframes sway1 {
-  0%, 100% {
-    transform: translateX(0) scaleX(1);
-  }
-  50% {
-    transform: translateX(-10px) scaleX(1.01);
-  }
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(-10px) scaleX(1.01); }
 }
 
 @keyframes sway2 {
-  0%, 100% {
-    transform: translateX(0) scaleX(1);
-  }
-  50% {
-    transform: translateX(8px) scaleX(1.01);
-  }
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(8px) scaleX(1.01); }
 }
 
 .login-container.operator {
@@ -79,7 +66,6 @@
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
   width: 100%;
   max-width: 420px;
-  transition: all 0.3s ease;
   position: relative;
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -90,11 +76,6 @@
   font-size: 3.5rem;
   margin-bottom: 0.5rem;
   color: #2d5016;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-}
-
-.login-logo svg {
-  filter: drop-shadow(0 2px 4px rgba(45, 80, 22, 0.2));
 }
 
 .login-box h1 {
@@ -112,16 +93,13 @@
   margin-bottom: 1.5rem;
   font-weight: 600;
   font-size: 1.1rem;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
 
-.mode-icon {
-  font-size: 1.2rem;
-}
+.mode-icon { font-size: 1.2rem; }
 
 .login-mode-header.operator {
   background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
@@ -135,9 +113,7 @@
   border: 2px solid #5d4037;
 }
 
-.login-box .form-group {
-  margin-bottom: 1.25rem;
-}
+.login-box .form-group { margin-bottom: 1.25rem; }
 
 .login-box .form-group label {
   display: block;
@@ -153,9 +129,9 @@
   border: 2px solid #c8e6c9;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
   background: white;
   color: #2d5016;
+  transition: border-color 0.3s ease;
 }
 
 .login-box .form-group input:focus {
@@ -172,13 +148,6 @@
   margin-bottom: 1rem;
   text-align: center;
   font-size: 0.9rem;
-  animation: shake 0.3s ease;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
 }
 
 .login-box button {
@@ -189,33 +158,25 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
   color: white;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.btn-icon {
-  font-size: 1.1rem;
-}
+.btn-icon { font-size: 1.1rem; }
 
-.operator-btn {
-  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
-}
-
+.operator-btn { background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%); }
 .operator-btn:hover {
   background: linear-gradient(135deg, #1a3409 0%, #2d5016 100%);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
 }
 
-.admin-btn {
-  background: linear-gradient(135deg, #1a3409 0%, #5d4037 100%);
-}
-
+.admin-btn { background: linear-gradient(135deg, #1a3409 0%, #5d4037 100%); }
 .admin-btn:hover {
   background: linear-gradient(135deg, #0d1f04 0%, #4e342e 100%);
   transform: translateY(-2px);
@@ -228,33 +189,9 @@
   transform: none;
 }
 
-.login-hint {
-  text-align: center;
-  color: #558b2f;
-  font-size: 0.85rem;
-  padding: 0.75rem;
-  background: #f1f8e9;
-  border-radius: 6px;
-  border-left: 4px solid #4a7c2c;
-  margin-bottom: 1rem;
-}
-
-.login-footer {
-  text-align: center;
-  color: #7f8c8d;
-  font-size: 0.85rem;
-  margin-top: 1rem;
-}
-
-
-
-
-/* Stars/Fireflies in the sky */
 .login-container .stars {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 60%;
   background-image: 
     radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent),
@@ -262,19 +199,9 @@
     radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.7), transparent),
     radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.5), transparent),
     radial-gradient(2px 2px at 90% 60%, rgba(255,255,255,0.6), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(2px 2px at 40% 20%, rgba(255,255,255,0.7), transparent),
     radial-gradient(3px 3px at 15% 60%, rgba(255,255,200,0.9), transparent),
     radial-gradient(2px 2px at 75% 40%, rgba(255,255,200,0.7), transparent),
-    radial-gradient(2px 2px at 35% 15%, rgba(255,255,200,0.6), transparent),
-    radial-gradient(3px 3px at 85% 75%, rgba(255,255,200,0.8), transparent),
-    radial-gradient(2px 2px at 45% 55%, rgba(255,255,200,0.7), transparent),
-    radial-gradient(1px 1px at 65% 25%, rgba(255,255,200,0.5), transparent),
-    radial-gradient(2px 2px at 25% 45%, rgba(255,255,200,0.6), transparent),
-    radial-gradient(3px 3px at 55% 85%, rgba(255,255,200,0.9), transparent),
-    radial-gradient(2px 2px at 10% 20%, rgba(255,255,200,0.7), transparent),
-    radial-gradient(1px 1px at 95% 35%, rgba(255,255,200,0.5), transparent),
-    radial-gradient(2px 2px at 70% 65%, rgba(255,255,200,0.8), transparent);
+    radial-gradient(3px 3px at 85% 75%, rgba(255,255,200,0.8), transparent);
   background-size: 200% 200%;
   animation: twinkle 5s ease-in-out infinite;
   z-index: 2;
@@ -282,79 +209,35 @@
 }
 
 @keyframes twinkle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-
-/* Animated Floating Fireflies */
 .firefly {
   position: absolute;
   width: 4px;
   height: 4px;
   background: rgba(255, 255, 150, 0.9);
   border-radius: 50%;
-  box-shadow: 
-    0 0 10px rgba(255, 255, 150, 0.8),
-    0 0 20px rgba(255, 255, 150, 0.6),
-    0 0 30px rgba(255, 255, 150, 0.4);
+  box-shadow: 0 0 10px rgba(255,255,150,0.8), 0 0 20px rgba(255,255,150,0.6), 0 0 30px rgba(255,255,150,0.4);
   animation: float linear infinite, glow 2s ease-in-out infinite;
   z-index: 2;
   pointer-events: none;
 }
 
 @keyframes float {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(30px, -40px) scale(1.2);
-  }
-  50% {
-    transform: translate(-20px, -80px) scale(0.8);
-  }
-  75% {
-    transform: translate(40px, -120px) scale(1.1);
-  }
-  100% {
-    transform: translate(0, -160px) scale(0.9);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(30px, -40px) scale(1.2); }
+  50%  { transform: translate(-20px, -80px) scale(0.8); }
+  75%  { transform: translate(40px, -120px) scale(1.1); }
+  100% { transform: translate(0, -160px) scale(0.9); opacity: 0; }
 }
 
 @keyframes glow {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 
-      0 0 10px rgba(255, 255, 150, 0.8),
-      0 0 20px rgba(255, 255, 150, 0.6),
-      0 0 30px rgba(255, 255, 150, 0.4);
-  }
-  50% {
-    opacity: 0.3;
-    box-shadow: 
-      0 0 5px rgba(255, 255, 150, 0.4),
-      0 0 10px rgba(255, 255, 150, 0.3),
-      0 0 15px rgba(255, 255, 150, 0.2);
-  }
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(255,255,150,0.8), 0 0 20px rgba(255,255,150,0.6); }
+  50%       { opacity: 0.3; box-shadow: 0 0 5px rgba(255,255,150,0.4), 0 0 10px rgba(255,255,150,0.3); }
 }
 
-.firefly:nth-child(3n) {
-  animation-duration: 5s, 2s;
-  width: 3px;
-  height: 3px;
-}
-
-.firefly:nth-child(5n) {
-  animation-duration: 7s, 3s;
-  width: 5px;
-  height: 5px;
-}
-
-.firefly:nth-child(7n) {
-  animation-duration: 4s, 2.5s;
-}
+.firefly:nth-child(3n) { animation-duration: 5s, 2s; width: 3px; height: 3px; }
+.firefly:nth-child(5n) { animation-duration: 7s, 3s; width: 5px; height: 5px; }
+.firefly:nth-child(7n) { animation-duration: 4s, 2.5s; }

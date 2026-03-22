@@ -9,9 +9,7 @@ const BaseStationView = () => {
   const [stationData, setStationData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchStationData();
-  }, []);
+  useEffect(() => { fetchStationData(); }, []);
 
   const fetchStationData = async () => {
     const token = localStorage.getItem('token');
@@ -27,9 +25,7 @@ const BaseStationView = () => {
     }
   };
 
-  if (loading) {
-    return <div className="loading">Loading station data...</div>;
-  }
+  if (loading) return <div className="loading">Loading station data...</div>;
 
   const stations = Object.keys(stationData);
 
@@ -64,7 +60,6 @@ const BaseStationView = () => {
           </div>
         </div>
       </div>
-
       <div className="stations-container">
         {stations.map((stationName) => {
           const devices = stationData[stationName];
@@ -77,7 +72,6 @@ const BaseStationView = () => {
                   <span className="device-count">{devices.length} devices</span>
                 </div>
               </div>
-
               <div className="devices-grid">
                 {devices.map((device) => (
                   <div key={device.device_id} className="device-card">
@@ -85,20 +79,10 @@ const BaseStationView = () => {
                       <strong>{device.name}</strong>
                       <span className="device-badge">{device.device_id}</span>
                     </div>
-                    
                     <div className="device-details">
-                      <div className="detail-row">
-                        <FiPhone className="detail-icon" />
-                        <span>{device.phone_number}</span>
-                      </div>
-                      <div className="detail-row">
-                        <FiUser className="detail-icon" />
-                        <span>Registered by: {device.registered_by_emp_id}</span>
-                      </div>
-                      <div className="detail-row">
-                        <FiClock className="detail-icon" />
-                        <span>{new Date(device.registered_at).toLocaleDateString()}</span>
-                      </div>
+                      <div className="detail-row"><FiPhone className="detail-icon" /><span>{device.phone_number}</span></div>
+                      <div className="detail-row"><FiUser className="detail-icon" /><span>Registered by: {device.registered_by_emp_id}</span></div>
+                      <div className="detail-row"><FiClock className="detail-icon" /><span>{new Date(device.registered_at).toLocaleDateString()}</span></div>
                     </div>
                   </div>
                 ))}

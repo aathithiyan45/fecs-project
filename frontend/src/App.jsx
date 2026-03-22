@@ -1,49 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Login from './components/Login';
-import AdminDashboard from './components/AdminDashboard';
-import OperatorDashboard from './components/OperatorDashboard';
+import Dashboard from './components/Dashboard';
 import { getCurrentUser } from './services/api';
+import './App.css';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [userRole, setUserRole] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    if (token) {
-      fetchUserRole();
-    }
+    if (token) fetchCurrentUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const fetchUserRole = async () => {
+  const fetchCurrentUser = async () => {
     try {
       const userData = await getCurrentUser(token);
-      setUserRole(userData.role);
+      setCurrentUser(userData);
     } catch (error) {
-      console.error('Failed to fetch user role:', error);
+      console.error('Failed to fetch user:', error);
+      handleLogout();
     }
   };
 
-  const handleLogin = (newToken, userData) => {
+  const handleLogin = (newToken) => {
     setToken(newToken);
     localStorage.setItem('token', newToken);
   };
 
   const handleLogout = () => {
     setToken(null);
+    setCurrentUser(null);
     localStorage.removeItem('token');
   };
 
-  if (!token) {
+  if (!token || !currentUser) {
     return <Login onLogin={handleLogin} />;
   }
 
-  if (userRole === 'admin') {
-    return <AdminDashboard onLogout={handleLogout} />;
-  }
-
-  return <OperatorDashboard onLogout={handleLogout} />;
+  return (
+    <Dashboard
+      token={token}
+      currentUser={currentUser}
+      onLogout={handleLogout}
+    />
+  );
 }
 
 export default App;
