@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models import Alert, MessageType, SignalType
+from app.models import Alert, MessageType, SignalType, MonitoringStatus
 from app.schemas import IncomingAlert
 from datetime import datetime, timedelta
 from app.config import settings
@@ -58,6 +58,23 @@ def store_alert(db: Session, alert: IncomingAlert) -> Alert:
     db.add(db_alert)
     db.commit()
     db.refresh(db_alert)
+    
+    # --- Unconsciousness Tracking ---
+    status = db.query(MonitoringStatus).filter(MonitoringStatus.device_id == alert.device_id).first()
+    if not status:
+        status = MonitoringStatus(device_id=alert.device_id)
+        db.add(status)
+    
+    if alert.signal_type == SignalType.AUTO and alert.message_type == MessageType.NORMAL:
+        status.last_auto_alert_time = alert.event_time
+        status.last_latitude = alert.latitude
+        status.last_longitude = alert.longitude
+    elif alert.signal_type == SignalType.MANUAL and alert.message_type == MessageType.NORMAL:
+        # User manually responded. Clear any active buzzer countdown.
+        status.buzzer_sent_at = None
+        
+    db.commit()
+
     return db_alert
 
 def should_send_ack(alert: IncomingAlert) -> bool:

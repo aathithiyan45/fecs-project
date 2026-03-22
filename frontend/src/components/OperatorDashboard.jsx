@@ -5,7 +5,7 @@ import axios from 'axios';
 import Map from './Map';
 import AlertList from './AlertList';
 import DeviceRegistration from './DeviceRegistration';
-import { getAlerts, getCurrentUser } from '../services/api';
+import { getAlerts, getCurrentUser, getBaseStations } from '../services/api';
 import { connectWebSocket } from '../services/websocket';
 import './OperatorDashboard.css';
 
@@ -13,6 +13,7 @@ const OperatorDashboard = ({ onLogout }) => {
   const [view, setView] = useState('home');
   const [alerts, setAlerts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [operatorStation, setOperatorStation] = useState(null);
   const [stats, setStats] = useState({
     activeAlerts: 0,
     alertsToday: 0,
@@ -33,6 +34,14 @@ const OperatorDashboard = ({ onLogout }) => {
     try {
       const userData = await getCurrentUser(token);
       setCurrentUser(userData);
+      
+      // If the operator has a station name assigned, fetch it to get its GPS boundaries
+      if (userData.assigned_station) {
+        const stationsData = await getBaseStations(token);
+        const myStation = stationsData.find(st => st.name === userData.assigned_station);
+        if (myStation) setOperatorStation(myStation);
+      }
+      
     } catch (error) {
       console.error('Failed to fetch user:', error);
     }
@@ -107,7 +116,7 @@ const OperatorDashboard = ({ onLogout }) => {
         </header>
         <div className="dashboard-split">
           <div className="map-container">
-            <Map alerts={alerts} />
+            <Map alerts={alerts} baseStation={operatorStation} />
           </div>
           <div className="alert-list-container">
             <AlertList alerts={alerts} token={token} onUpdate={loadAlerts} />

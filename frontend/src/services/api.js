@@ -73,3 +73,18 @@ export const deactivateDeviceRegistration = async (deviceId, token) => {
   });
   return response.data;
 };
+
+// Base Station APIs
+export const getBaseStations = async (token) => {
+  const response = await axios.get(`${API_URL}/stations`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const createBaseStation = async (stationData, token) => {
+  const response = await axios.post(`${API_URL}/stations`, stationData, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};

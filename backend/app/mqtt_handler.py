@@ -29,8 +29,8 @@ class MQTTHandler:
                 return
             
             # Map single-char codes to full values
-            msg_type_map = {'E': 'emergency', 'W': 'warning', 'I': 'info'}
-            sig_type_map = {'M': 'manual', 'A': 'automatic'}
+            msg_type_map = {'N': 'normal', 'H': 'high', 'E': 'emergency', 'C': 'cancel'}
+            sig_type_map = {'M': 'manual', 'A': 'auto'}
             source_map = {'1': 'hardware', '0': 'software'}
             
             data = {

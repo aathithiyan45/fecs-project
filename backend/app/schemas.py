@@ -114,3 +114,27 @@ class UnmappedDevice(BaseModel):
     last_latitude: float
     last_longitude: float
     last_event_time: datetime
+
+class BaseStationCreate(BaseModel):
+    name: str
+    latitude: float
+    longitude: float
+    radius_meters: float
+
+class BaseStationResponse(BaseModel):
+    id: int
+    name: str
+    latitude: float
+    longitude: float
+    radius_meters: float
+    is_active: bool
+    
+    class Config:
+        from_attributes = True
+
+class BaseStationUpdate(BaseModel):
+    name: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    radius_meters: Optional[float] = None
+    is_active: Optional[bool] = None

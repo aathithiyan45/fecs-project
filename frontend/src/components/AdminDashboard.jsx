@@ -4,6 +4,7 @@ import axios from 'axios';
 import UserManagement from './UserManagement';
 import AlertLogs from './AlertLogs';
 import BaseStationView from './BaseStationView';
+import NetworkPlanner from './NetworkPlanner';
 import './AdminDashboard.css';
 
 function AdminDashboard({ onLogout }) {
@@ -37,6 +38,10 @@ function AdminDashboard({ onLogout }) {
 
   if (view === 'logs') {
     return <AlertLogs onBack={() => setView('home')} />;
+  }
+  
+  if (view === 'planner') {
+    return <NetworkPlanner onBack={() => setView('home')} />;
   }
 
   if (view === 'stations') {
@@ -105,6 +110,15 @@ function AdminDashboard({ onLogout }) {
             </div>
             <h2>BASE STATIONS</h2>
             <p>View devices by station</p>
+            <button className="card-btn">Open →</button>
+          </div>
+
+          <div className="dashboard-card" onClick={() => setView('planner')}>
+            <div className="card-icon" style={{ backgroundColor: '#e3f2fd', color: '#1976d2' }}>
+              <FaMapMarkedAlt />
+            </div>
+            <h2>NETWORK PLANNER</h2>
+            <p>Geofence base stations</p>
             <button className="card-btn">Open →</button>
           </div>
         </div>

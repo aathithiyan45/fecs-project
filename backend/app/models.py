@@ -61,3 +61,25 @@ class DeviceRegistration(Base):
     registered_by_emp_id = Column(String, nullable=False)
     registered_at = Column(DateTime, server_default=func.now(), nullable=False)
     is_active = Column(Integer, default=1, nullable=False)
+
+class MonitoringStatus(Base):
+    __tablename__ = "monitoring_status"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    device_id = Column(String, unique=True, index=True, nullable=False)
+    last_auto_alert_time = Column(DateTime, nullable=True)
+    last_latitude = Column(Float, nullable=True)
+    last_longitude = Column(Float, nullable=True)
+    buzzer_sent_at = Column(DateTime, nullable=True)
+    last_buzzer_eval_time = Column(DateTime, nullable=True)
+
+class BaseStation(Base):
+    __tablename__ = "base_stations"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, unique=True, index=True, nullable=False)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
+    radius_meters = Column(Float, default=15000.0, nullable=False)
+    is_active = Column(Integer, default=1, nullable=False)
+

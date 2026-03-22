@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function UserManagement({ onBack, onStatsUpdate }) {
   const [users, setUsers] = useState([]);
+  const [baseStations, setBaseStations] = useState([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [nextEmployeeId, setNextEmployeeId] = useState('');
   const [formData, setFormData] = useState({
@@ -17,7 +18,20 @@ function UserManagement({ onBack, onStatsUpdate }) {
 
   useEffect(() => {
     fetchUsers();
+    fetchBaseStations();
   }, []);
+
+  const fetchBaseStations = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:8000/api/stations', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setBaseStations(response.data);
+    } catch (error) {
+      console.error('Error fetching base stations:', error);
+    }
+  };
 
   const fetchUsers = async () => {
     try {
@@ -135,12 +149,17 @@ function UserManagement({ onBack, onStatsUpdate }) {
                 </div>
                 <div className="form-group">
                   <label>Assigned Station</label>
-                  <input
-                    type="text"
+                  <select
                     value={formData.assigned_station}
                     onChange={(e) => setFormData({ ...formData, assigned_station: e.target.value })}
-                    placeholder="e.g., North Range Station"
-                  />
+                    required
+                    style={{ width: '100%', padding: '0.75rem', border: '1px solid #ddd', borderRadius: '4px', fontSize: '1rem', transition: 'border-color 0.2s', backgroundColor: 'white' }}
+                  >
+                    <option value="">-- Select a Base Station --</option>
+                    {baseStations.map(station => (
+                        <option key={station.id} value={station.name}>{station.name} (Radius: {station.radius_meters/1000}km)</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="form-group">
                   <label>Password</label>
