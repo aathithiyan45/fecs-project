@@ -64,6 +64,9 @@ class UserCreate(BaseModel):
     email: Optional[str] = None
     employee_id: Optional[str] = None
     assigned_station: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    radius: Optional[float] = None
 
 class UserResponse(BaseModel):
     id: int
@@ -72,6 +75,9 @@ class UserResponse(BaseModel):
     email: Optional[str]
     employee_id: Optional[str]
     assigned_station: Optional[str]
+    latitude: Optional[float]
+    longitude: Optional[float]
+    radius: Optional[float]
     created_at: datetime
     is_active: bool
     

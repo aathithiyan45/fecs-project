@@ -48,6 +48,9 @@ class User(Base):
     email = Column(String, nullable=True)
     employee_id = Column(String, unique=True, nullable=True)
     assigned_station = Column(String, nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
+    radius = Column(Float, nullable=True)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
     is_active = Column(Integer, default=1, nullable=False)
 

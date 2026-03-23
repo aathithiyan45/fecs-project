@@ -93,7 +93,10 @@ async def create_user(
         role=user.role,
         email=user.email,
         employee_id=employee_id,
-        assigned_station=user.assigned_station
+        assigned_station=user.assigned_station,
+        latitude=user.latitude,
+        longitude=user.longitude,
+        radius=user.radius
     )
     db.add(db_user)
     db.commit()
